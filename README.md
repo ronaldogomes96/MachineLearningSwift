@@ -1,2 +1,2 @@
-# MachineLearning_Swift
-Codigos de estudo de machine learning na linguagem Swift
+# Machine Learning Swift
+Repositorio com o objetivo de documentar o estudo de machine learning e seus frameworks em swift / iOS. 
