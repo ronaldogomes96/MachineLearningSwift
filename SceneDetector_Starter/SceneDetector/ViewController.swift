@@ -1,34 +1,7 @@
-/**
- * Copyright (c) 2017 Razeware LLC
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
- * distribute, sublicense, create a derivative work, and/or sell copies of the
- * Software in any work that is designed, intended, or marketed for pedagogical or
- * instructional purposes related to programming, coding, application development,
- * or information technology.  Permission for such use, copying, modification,
- * merger, publication, distribution, sublicensing, creation of derivative works,
- * or sale is expressly withheld.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
 
 import UIKit
+import CoreML
+import Vision
 
 class ViewController: UIViewController {
 
@@ -48,10 +21,69 @@ class ViewController: UIViewController {
     }
 
     scene.image = image
+    
+    //Possibilita o uso do framework
+    guard let ciImage = CIImage(image: image) else {
+      fatalError("couldn't convert UIImage to CIImage")
+    }
+
+    detectScene(image: ciImage)
   }
 }
 
 // MARK: - IBActions
+
+// MARK: - Methods
+
+extension ViewController {
+
+  //Funcao que o processo de analise da imagem
+  func detectScene(image: CIImage) {
+    answerLabel.text = "detecting scene..."
+    
+    //O fluxo de trabalho padrão do Vision é criar um modelo, criar uma ou mais solicitações e criar e executar
+    //um manipulador de solicitações.
+  
+    // Carregando o modelo de ML atraves da classe gerada pelo GoogLeNetPlaces
+    guard let model = try? VNCoreMLModel(for: GoogLeNetPlaces().model) else {
+      fatalError("can't load Places ML model")
+    }
+    
+    //Criacao da requisicao de vision\
+    //VNCoreMLRequest é um analisador de imagem que usa CoreML
+    /*
+      Você verifica em request.results se há uma matriz de VNClassificationObservationobjetos, que é o que
+      a estrutura Vision retorna quando o modelo Core ML é um classificador , em vez de um preditor ou
+      processador de imagem.
+      A VNClassificationObservationtem duas propriedades: identifier- a String- e confidence- um número
+      entre 0 e 1 - que é a probabilidade de a classificação estar correta.
+      Entao em results.first é o primeiro e maior valor de confianca
+     */
+    let request = VNCoreMLRequest(model: model) { [weak self] request, error in
+      guard let results = request.results as? [VNClassificationObservation],
+        let topResult = results.first else {
+          fatalError("unexpected result type from VNCoreMLRequest")
+      }
+
+      // Enviando para a fila principal
+      let article = (self?.vowels.contains(topResult.identifier.first!))! ? "an" : "a"
+      DispatchQueue.main.async { [weak self] in
+        self?.answerLabel.text = "\(Int(topResult.confidence * 100))% it's \(article) \(topResult.identifier)"
+      }
+    }
+    
+    // Execute o classificador Core ML GoogLeNetPlaces na fila
+    let handler = VNImageRequestHandler(ciImage: image)
+    DispatchQueue.global(qos: .userInteractive).async {
+      do {
+        try handler.perform([request])
+      } catch {
+        print(error)
+      }
+    }
+  }
+}
+
 extension ViewController {
 
   @IBAction func pickImage(_ sender: Any) {
@@ -73,6 +105,13 @@ extension ViewController: UIImagePickerControllerDelegate {
     }
 
     scene.image = image
+    
+    //Possibilita o uso do framework
+    guard let ciImage = CIImage(image: image) else {
+      fatalError("couldn't convert UIImage to CIImage")
+    }
+
+    detectScene(image: ciImage)
   }
 }
 
