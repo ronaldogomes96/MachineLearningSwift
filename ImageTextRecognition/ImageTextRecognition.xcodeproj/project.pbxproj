@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7709DB9B255EA7CA00D069FA /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7709DB9A255EA7CA00D069FA /* Model.swift */; };
 		77756569255DC63100919A2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77756568255DC63100919A2F /* AppDelegate.swift */; };
 		7775656B255DC63100919A2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775656A255DC63100919A2F /* SceneDelegate.swift */; };
 		7775656D255DC63100919A2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775656C255DC63100919A2F /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7709DB9A255EA7CA00D069FA /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		77756565255DC63100919A2F /* ImageTextRecognition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageTextRecognition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77756568255DC63100919A2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7775656A255DC63100919A2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				7775656A255DC63100919A2F /* SceneDelegate.swift */,
 				7775656C255DC63100919A2F /* ViewController.swift */,
 				7775656E255DC63100919A2F /* Main.storyboard */,
+				7709DB9A255EA7CA00D069FA /* Model.swift */,
 				77756571255DC63200919A2F /* Assets.xcassets */,
 				777565A1255DC72D00919A2F /* Alphanum_28x28.mlmodel */,
 				77756573255DC63200919A2F /* LaunchScreen.storyboard */,
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7709DB9B255EA7CA00D069FA /* Model.swift in Sources */,
 				7775656D255DC63100919A2F /* ViewController.swift in Sources */,
 				77756569255DC63100919A2F /* AppDelegate.swift in Sources */,
 				7775656B255DC63100919A2F /* SceneDelegate.swift in Sources */,
