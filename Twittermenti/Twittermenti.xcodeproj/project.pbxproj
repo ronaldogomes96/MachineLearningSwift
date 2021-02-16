@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		773F3EBB25AE70B0002DDD08 /* TweetSentimentClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 773F3EBA25AE70B0002DDD08 /* TweetSentimentClassifier.mlmodel */; };
 		77903FD925DC621300E26937 /* SwifteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 77903FC725DC616500E26937 /* SwifteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7791DCB725B4BDA600850AF2 /* JsonResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791DCB625B4BDA600850AF2 /* JsonResult.swift */; };
 		AD9EC65020FE2EF4002AE9BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EC64F20FE2EF4002AE9BF /* AppDelegate.swift */; };
 		AD9EC65220FE2EF4002AE9BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9EC65120FE2EF4002AE9BF /* ViewController.swift */; };
 		AD9EC65520FE2EF4002AE9BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD9EC65320FE2EF4002AE9BF /* Main.storyboard */; };
@@ -74,7 +73,6 @@
 		6D2AD38727A4795F8C9FB354 /* Pods_Twittermenti.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Twittermenti.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		773F3EBA25AE70B0002DDD08 /* TweetSentimentClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TweetSentimentClassifier.mlmodel; sourceTree = SOURCE_ROOT; };
 		77903FBE25DC616500E26937 /* Swifter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Swifter.xcodeproj; path = "Swifter-master/Swifter.xcodeproj"; sourceTree = "<group>"; };
-		7791DCB625B4BDA600850AF2 /* JsonResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonResult.swift; sourceTree = "<group>"; };
 		AD9EC64C20FE2EF4002AE9BF /* Twittermenti.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Twittermenti.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD9EC64F20FE2EF4002AE9BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD9EC65120FE2EF4002AE9BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 				AD9EC64F20FE2EF4002AE9BF /* AppDelegate.swift */,
 				773F3EBA25AE70B0002DDD08 /* TweetSentimentClassifier.mlmodel */,
 				AD9EC65120FE2EF4002AE9BF /* ViewController.swift */,
-				7791DCB625B4BDA600850AF2 /* JsonResult.swift */,
 				AD9EC65320FE2EF4002AE9BF /* Main.storyboard */,
 				AD9EC65620FE2EF7002AE9BF /* Assets.xcassets */,
 				AD9EC65820FE2EF7002AE9BF /* LaunchScreen.storyboard */,
@@ -322,7 +319,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7791DCB725B4BDA600850AF2 /* JsonResult.swift in Sources */,
 				773F3EBB25AE70B0002DDD08 /* TweetSentimentClassifier.mlmodel in Sources */,
 				AD9EC65220FE2EF4002AE9BF /* ViewController.swift in Sources */,
 				AD9EC65020FE2EF4002AE9BF /* AppDelegate.swift in Sources */,

@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var sentimentLabel: UILabel!
     
+    let tweetCount = 100
+    
     //Carrega o modelo coreml
     let sentimentClassifier = TweetSentimentClassifier()
     
@@ -28,48 +30,73 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Usa a api pra fazer a busca do tweet 
-        swifter.searchTweet(using: textField.text ?? "", lang: "en", count: 100, tweetMode: .extended) { (results, metadata) in
-
-            // Inicializa um array que ira ter os inputs do tipo do modelo
-            var tweets = [TweetSentimentClassifierInput]()
-            
-            for i in 0..<100 {
-                if let tweet = results[i]["full_text"].string {
-                    
-                    //Transforma a string em tipo input do modelo
-                    let tweetForClassification = TweetSentimentClassifierInput(text: tweet)
-                    tweets.append(tweetForClassification)
-                }
-            }
-            
-            do {
-                // Faz a predicao do array de inputs
-                let predictions = try self.sentimentClassifier.predictions(inputs: tweets)
-                var sentimentScore = 0
+    }
+    
+    @IBAction func predictPressed(_ sender: Any) {
+        fecthTweets()
+    }
+    
+    func fecthTweets() {
+        if let searchText = textField.text {
+            //Usa a api pra fazer a busca do tweet
+            swifter.searchTweet(using: searchText, lang: "en", count: tweetCount, tweetMode: .extended) { (results, metadata) in
                 
-                for pred in predictions {
-                    if pred.label == "pos" {
-                        sentimentScore += 1
-                    } else if pred.label == "neg" {
-                        sentimentScore -= 1
+                // Inicializa um array que ira ter os inputs do tipo do modelo
+                var tweets = [TweetSentimentClassifierInput]()
+                
+                for i in 0..<100 {
+                    if let tweet = results[i]["full_text"].string {
+                        //Transforma a string em tipo input do modelo
+                        let tweetForClassification = TweetSentimentClassifierInput(text: tweet)
+                        tweets.append(tweetForClassification)
                     }
                 }
-            } catch {
+                
+                self.makePredictions(with: tweets)
+                
+            } failure: { (error) in
                 print(error)
             }
             
-        } failure: { (error) in
+        }
+    }
+    
+    func makePredictions(with tweets: [TweetSentimentClassifierInput]) {
+        do {
+            // Faz a predicao do array de inputs
+            let predictions = try self.sentimentClassifier.predictions(inputs: tweets)
+            var sentimentScore = 0
+            
+            for pred in predictions {
+                if pred.label == "Pos" {
+                    sentimentScore += 1
+                } else if pred.label == "Neg" {
+                    sentimentScore -= 1
+                }
+            }
+            
+            updateUI(with: sentimentScore )
+        } catch {
             print(error)
         }
-
-    }
-
-    @IBAction func predictPressed(_ sender: Any) {
-    
-    
     }
     
+    func updateUI(with sentimentScore: Int) {
+        if sentimentScore > 20 {
+            self.sentimentLabel.text = "😍"
+        } else if sentimentScore > 10 {
+            self.sentimentLabel.text = "😁"
+        } else if sentimentScore > 0 {
+            self.sentimentLabel.text = "🙂"
+        } else if sentimentScore == 0 {
+            self.sentimentLabel.text = "😐"
+        } else if sentimentScore > -10 {
+            self.sentimentLabel.text = "😕"
+        } else if sentimentScore > -20 {
+            self.sentimentLabel.text = "😡"
+        } else {
+            self.sentimentLabel.text = "🤮"
+        }
+    }
 }
 
