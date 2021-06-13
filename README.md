@@ -19,12 +19,29 @@ Click on each of the project folders for more information.
 As this repository is for study and on such a vast subject, I intend to continue placing projects, using new technologies and frameworks, showing more and more the power that Swift applications have over Machine Learning.
 
 ## How to use?
-### Xcode Project
-You can clone the project using:
 
-git clone https://github.com/ronaldogomes96/MachineLearningSwift.git
+This project uses `Git LFS` to upload CoreML models (.mlmodel files).
 
-After that, just run the one project in the simulator itself.
+To be able to download this project and use the templates contained in it, first
+
+1. Normally clone the repository
+
+> SSH: `git clone git@github.com:ronaldogomes96/MachineLearningSwift.git`
+>
+> HTML: `git clone https://github.com/ronaldogomes96/MachineLearningSwift.git`
+
+2. Download [Git LFS] (https://git-lfs.github.com) on your Mac
+
+> `brew install git-lfs`
+
+3. After installing Git LFS, through the terminal, enter the project's repository folder, and execute:
+
+> `git lfs install`
+
+> `git lfs pull`
+
+At that point, the templates will be downloaded to the cloned repository. Once the download is complete, you can open the project and use it normally.
+
 
 ## Want to contribute?
 
